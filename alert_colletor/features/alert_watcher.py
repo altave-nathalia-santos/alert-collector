@@ -24,12 +24,10 @@ class AlertWatcher:
         return response.json().get("access")
 
     async def _ensure_token(self) -> None:
-        """Ensure the token is available before making API requests."""
         if not self.token:
             self.token = self._create_token()
 
     def _transform_alerts(self, alerts_page: list[dict]) -> list[Alert]:
-        """Transform raw alerts into Alert objects, filtering by category."""
         transformed_alerts = []
 
         for alert in alerts_page:
@@ -50,7 +48,6 @@ class AlertWatcher:
         return transformed_alerts
 
     async def list_operation_alerts(self, tenant: str) -> list[Alert]:
-        """Retrieve and transform alerts for a given tenant."""
         await self._ensure_token()
 
         params = {

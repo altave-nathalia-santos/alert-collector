@@ -2,3 +2,5 @@ requests
 httpx
 python-decouple
 attrs
+boto3
+datetime
