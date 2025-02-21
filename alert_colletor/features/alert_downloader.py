@@ -16,17 +16,17 @@ class AlertImageDownloader:
         self.bucket_name = "harpia-alerts"
 
     def _generate_image_path(self, alert: dict) -> str:
-        tenant = alert["tenant"]["name"]
+        tenant = alert.tenant
         
-        timestamp = datetime.fromtimestamp(alert["timestamp"] / 1000, tz=timezone.utc)
+        timestamp = datetime.fromtimestamp(alert.timestamp / 1000, tz=timezone.utc)
         year, month, day = timestamp.strftime("%Y-%m-%d").split("-")
-        identifier = alert["identifier"]
+        identifier = alert.id
 
-        return f"{tenant}/{year}/{month}/{day}/{alert['timestamp']}_{identifier}_clean."
+        return f"{tenant}/{year}/{month}/{day}/{alert.timestamp}_{identifier}_clean."
 
     def download_alert_image(self, alert: dict, save_dir: str = "/mnt/d/expro/dynamic_redzones") -> str:
         image_path = self._generate_image_path(alert)
-        file_name = f"{alert['identifier']}.jpg"
+        file_name = f"{alert.id}.jpg"
         local_file_path = os.path.join(save_dir, file_name)
 
         os.makedirs(save_dir, exist_ok=True)

@@ -32,7 +32,6 @@ class AlertWatcher:
 
         for alert in alerts_page:
             categories = alert.get("categories", [])
-            print(alert)
 
             if self.selected_category in categories:
                 transformed_alerts.append(
