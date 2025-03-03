@@ -24,7 +24,7 @@ class AlertImageDownloader:
 
         return f"{tenant}/{year}/{month}/{day}/{alert.timestamp}_{identifier}_clean."
 
-    def download_alert_image(self, alert: dict, save_dir: str = "/mnt/d/expro/dynamic_redzones") -> str:
+    def download_alert_image(self, alert: dict, save_dir: str = "./downloader") -> str:
         image_path = self._generate_image_path(alert)
         file_name = f"{alert.id}.jpg"
         local_file_path = os.path.join(save_dir, file_name)
